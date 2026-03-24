@@ -78,8 +78,8 @@ function MeetingBadge({ threshold }: { threshold: 'Yes' | 'Maybe' | 'No' }) {
 
 function PersonaCard({ result }: { result: PersonaResult }) {
   const avatarColors: Record<string, string> = {
-    PE: 'bg-blue-500',
-    DS: 'bg-violet-500',
+    SA: 'bg-blue-500',
+    IM: 'bg-violet-500',
     VP: 'bg-slate-500',
   };
   const avatarColor = avatarColors[result.avatar] || 'bg-gray-600';
@@ -103,7 +103,6 @@ function PersonaCard({ result }: { result: PersonaResult }) {
 
   return (
     <div className="bg-gray-900 rounded-xl border border-gray-800 p-5 flex flex-col gap-4 hover:border-gray-700 transition-colors">
-      {/* Header */}
       <div className="flex items-start justify-between gap-2">
         <div className="flex items-center gap-3">
           <div className={`w-9 h-9 rounded-full ${avatarColor} flex items-center justify-center text-white text-xs font-bold shrink-0`}>
@@ -118,14 +117,12 @@ function PersonaCard({ result }: { result: PersonaResult }) {
         <MeetingBadge threshold={result.meeting_threshold} />
       </div>
 
-      {/* Scores */}
       <div className="flex flex-col gap-1.5">
         <ScoreBadge score={result.comprehension_score} label="Comprehension" />
         <ScoreBadge score={result.resonance_score} label="Resonance" />
         <ScoreBadge score={result.differentiation_score} label="Differentiation" />
       </div>
 
-      {/* Notes */}
       <div className="flex flex-col gap-3 text-sm">
         {result.comprehension_note && (
           <div>
@@ -147,7 +144,6 @@ function PersonaCard({ result }: { result: PersonaResult }) {
         )}
       </div>
 
-      {/* Objection */}
       {result.primary_objection && (
         <div className="bg-orange-500/10 border border-orange-500/20 rounded-lg p-3">
           <div className="text-xs font-semibold text-orange-400 uppercase tracking-wider mb-1">Primary Objection</div>
@@ -155,12 +151,10 @@ function PersonaCard({ result }: { result: PersonaResult }) {
         </div>
       )}
 
-      {/* Meeting reason */}
       {result.meeting_reason && (
         <p className="text-xs text-gray-500 italic">"{result.meeting_reason}"</p>
       )}
 
-      {/* Improvement */}
       {result.improvement && (
         <div className="bg-teal-500/10 border border-teal-500/20 rounded-lg p-3">
           <div className="text-xs font-semibold text-teal-400 uppercase tracking-wider mb-1">What would make it stronger</div>
@@ -173,8 +167,8 @@ function PersonaCard({ result }: { result: PersonaResult }) {
 
 function LoadingCard({ name, role, avatar }: { name: string; role: string; avatar: string }) {
   const avatarColors: Record<string, string> = {
-    PE: 'bg-blue-500',
-    DS: 'bg-violet-500',
+    SA: 'bg-blue-500',
+    IM: 'bg-violet-500',
     VP: 'bg-slate-500',
   };
   return (
@@ -204,12 +198,11 @@ function LoadingCard({ name, role, avatar }: { name: string; role: string; avata
 }
 
 const PLACEHOLDER_PERSONAS = [
-  { name: 'Marcus', role: 'Senior Platform Engineer', avatar: 'PE' },
-  { name: 'Priya', role: 'Sr. Data Scientist / Analytics Lead', avatar: 'DS' },
-  { name: 'David', role: 'VP of Engineering', avatar: 'VP' },
+  { name: 'Jordan', role: 'Senior Storage Administrator', avatar: 'SA' },
+  { name: 'Sarah', role: 'Infrastructure & Storage Operations Manager', avatar: 'IM' },
+  { name: 'Michael', role: 'VP of IT / Head of Infrastructure', avatar: 'VP' },
 ];
 
-// Stat card for average scores
 function StatCard({ label, value }: { label: string; value: string }) {
   const numVal = parseFloat(value);
   const color = isNaN(numVal)
@@ -385,7 +378,6 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gray-950 text-gray-100">
 
-      {/* Header */}
       <header className="bg-gray-900 border-b border-gray-800 sticky top-0 z-10">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
@@ -396,23 +388,20 @@ export default function Home() {
             </div>
             <div>
               <h1 className="text-base font-semibold text-white leading-tight">Synthetic Audience Tester</h1>
-              <p className="text-xs text-gray-500">Test messaging before spending a dollar on media</p>
+              <p className="text-xs text-gray-500">Test DII messaging before spending a dollar on media</p>
             </div>
           </div>
           <div className="flex items-center gap-2">
             <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-            <span className="text-xs text-gray-500">ICR Buyer Personas</span>
+            <span className="text-xs text-gray-500">DII Buyer Personas</span>
           </div>
         </div>
       </header>
 
       <main className="max-w-6xl mx-auto px-6 py-8 flex flex-col gap-6">
-
-        {/* Input Panel */}
         <div className="bg-gray-900 rounded-xl border border-gray-800 p-6">
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
 
-            {/* Campaign Name */}
             <div className="flex flex-col gap-1.5">
               <label htmlFor="campaign" className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
                 Campaign Name <span className="text-gray-600 normal-case font-normal">(optional)</span>
@@ -422,12 +411,11 @@ export default function Home() {
                 type="text"
                 value={campaignName}
                 onChange={(e) => setCampaignName(e.target.value)}
-                placeholder="e.g. Managed Apache Kafka — Q3 FY26"
+                placeholder="e.g. Storage Cost Accountability — Q3 FY26"
                 className="w-full px-4 py-2.5 bg-gray-950 border border-gray-700 rounded-lg text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500 transition-colors"
               />
             </div>
 
-            {/* Source Selector */}
             <div className="flex flex-col gap-2">
               <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Message Source</label>
               <div className="flex gap-1.5 p-1 bg-gray-950 rounded-lg border border-gray-800 w-fit">
@@ -448,7 +436,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* URL Input */}
             {sourceType === 'url' && (
               <div className="flex flex-col gap-2">
                 <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Page URL</label>
@@ -474,7 +461,6 @@ export default function Home() {
               </div>
             )}
 
-            {/* PDF Upload */}
             {sourceType === 'pdf' && (
               <div className="flex flex-col gap-2">
                 <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">PDF File</label>
@@ -508,18 +494,12 @@ export default function Home() {
                     </div>
                   )}
                 </div>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept=".pdf,application/pdf"
-                  className="hidden"
-                  onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileSelect(f); }}
-                />
+                <input ref={fileInputRef} type="file" accept=".pdf,application/pdf" className="hidden"
+                  onChange={(e) => { const f = e.target.files?.[0]; if (f) handleFileSelect(f); }} />
                 {extractError && <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">{extractError}</p>}
               </div>
             )}
 
-            {/* Image Upload */}
             {sourceType === 'image' && (
               <div className="flex flex-col gap-2">
                 <label className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Banner Ad or Marketing Image</label>
@@ -552,18 +532,12 @@ export default function Home() {
                     </div>
                   )}
                 </div>
-                <input
-                  ref={imageInputRef}
-                  type="file"
-                  accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
-                  className="hidden"
-                  onChange={(e) => { const f = e.target.files?.[0]; if (f) handleImageSelect(f); }}
-                />
+                <input ref={imageInputRef} type="file" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp" className="hidden"
+                  onChange={(e) => { const f = e.target.files?.[0]; if (f) handleImageSelect(f); }} />
                 {extractError && <p className="text-xs text-red-400 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">{extractError}</p>}
               </div>
             )}
 
-            {/* Message Textarea */}
             <div className="flex flex-col gap-1.5">
               <div className="flex items-center justify-between">
                 <label htmlFor="message" className="text-xs font-semibold text-gray-400 uppercase tracking-wider">
@@ -580,13 +554,10 @@ export default function Home() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder={
-                  sourceType === 'url'
-                    ? 'Extract a URL above, or paste your message here directly...'
-                    : sourceType === 'pdf'
-                    ? 'Upload a PDF above, or paste your message here directly...'
-                    : sourceType === 'image'
-                    ? 'Upload an image above — extracted copy will appear here for review...'
-                    : 'Paste your headline, value proposition, email opening, or ad copy here...'
+                  sourceType === 'url' ? 'Extract a URL above, or paste your message here directly...'
+                  : sourceType === 'pdf' ? 'Upload a PDF above, or paste your message here directly...'
+                  : sourceType === 'image' ? 'Upload an image above — extracted copy will appear here for review...'
+                  : 'Paste your headline, value proposition, email opening, or ad copy here...'
                 }
                 rows={5}
                 className="w-full px-4 py-3 bg-gray-950 border border-gray-700 rounded-lg text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500 resize-none transition-colors"
@@ -614,11 +585,7 @@ export default function Home() {
                 )}
               </button>
               {result && !loading && (
-                <button
-                  type="button"
-                  onClick={resetAll}
-                  className="text-sm text-gray-500 hover:text-gray-300 transition-colors"
-                >
+                <button type="button" onClick={resetAll} className="text-sm text-gray-500 hover:text-gray-300 transition-colors">
                   ← Start over
                 </button>
               )}
@@ -626,14 +593,12 @@ export default function Home() {
           </form>
         </div>
 
-        {/* Error */}
         {error && (
           <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4 text-sm text-red-400">
             <strong>Error:</strong> {error}
           </div>
         )}
 
-        {/* Loading State */}
         {loading && (
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-center gap-2 text-sm text-gray-500">
@@ -649,11 +614,8 @@ export default function Home() {
           </div>
         )}
 
-        {/* Results */}
         {result && !loading && (
           <div className="flex flex-col gap-5">
-
-            {/* Summary Bar */}
             <div className="flex items-start justify-between flex-wrap gap-4">
               <div>
                 <h2 className="text-base font-semibold text-white">
@@ -670,7 +632,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Rationalization Signal */}
             {result.rationalizationSignal && (
               <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 flex gap-3">
                 <span className="text-amber-400 text-lg shrink-0">⚠</span>
@@ -684,14 +645,13 @@ export default function Home() {
               </div>
             )}
 
-            {/* Meeting Threshold Bar */}
             <div className="bg-gray-900 border border-gray-800 rounded-xl p-4 flex items-center gap-6 flex-wrap">
               <div className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Would take a meeting?</div>
               {result.results.map((r) => (
                 <div key={r.id} className="flex items-center gap-2">
                   <div className="flex items-center gap-1.5">
                     <div className={`w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold ${
-                      r.avatar === 'PE' ? 'bg-blue-500' : r.avatar === 'DS' ? 'bg-violet-500' : 'bg-slate-500'
+                      r.avatar === 'SA' ? 'bg-blue-500' : r.avatar === 'IM' ? 'bg-violet-500' : 'bg-slate-500'
                     }`}>{r.avatar}</div>
                     <span className="text-xs text-gray-400">{r.name}</span>
                   </div>
@@ -700,12 +660,10 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Persona Cards */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {result.results.map((r) => <PersonaCard key={r.id} result={r} />)}
             </div>
 
-            {/* Copy Brief CTA */}
             {!synthesis && !synthesizing && (
               <div className="flex flex-col items-center gap-2 py-2">
                 <button
@@ -737,7 +695,6 @@ export default function Home() {
               </div>
             )}
 
-            {/* Copy Brief */}
             {synthesis && (
               <div className="flex flex-col gap-4">
                 <div className="flex items-center gap-3">
@@ -747,7 +704,6 @@ export default function Home() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {/* What's Landing */}
                   {synthesis.whats_landing?.length > 0 && (
                     <div className="bg-gray-900 rounded-xl border border-gray-800 overflow-hidden">
                       <div className="flex items-center gap-2 px-5 py-3 border-b border-gray-800 bg-emerald-500/5">
@@ -765,7 +721,6 @@ export default function Home() {
                     </div>
                   )}
 
-                  {/* What's Falling Flat */}
                   {synthesis.whats_falling_flat?.length > 0 && (
                     <div className="bg-gray-900 rounded-xl border border-gray-800 overflow-hidden">
                       <div className="flex items-center gap-2 px-5 py-3 border-b border-gray-800 bg-red-500/5">
@@ -784,7 +739,6 @@ export default function Home() {
                   )}
                 </div>
 
-                {/* Rewrite Brief */}
                 {synthesis.rewrite_brief?.length > 0 && (
                   <div className="bg-gray-900 rounded-xl border border-gray-800 overflow-hidden">
                     <div className="flex items-center gap-2 px-5 py-3 border-b border-gray-800 bg-teal-500/5">
@@ -817,7 +771,7 @@ export default function Home() {
       </main>
 
       <footer className="max-w-6xl mx-auto px-6 py-8 text-center text-xs text-gray-700">
-        Synthetic audience personas are AI-generated approximations of your ICR ICP. Results are directional signals, not market research.
+        Synthetic audience personas are AI-generated approximations of your DII ICP. Results are directional signals, not market research.
       </footer>
     </div>
   );
