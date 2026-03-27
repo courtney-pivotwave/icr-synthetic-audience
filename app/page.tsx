@@ -430,7 +430,7 @@ export default function Home() {
                 id="campaign-context"
                 value={campaignContext}
                 onChange={(e) => setCampaignContext(e.target.value)}
-                placeholder="e.g. Instaclustr is launching a new managed Kafka service at Community over Code, targeting enterprise teams already running self-managed Kafka who are evaluating a move to managed."
+                placeholder="e.g. NetApp is launching the Cost Optimization campaign in Q3, targeting IT infrastructure directors who are under pressure to justify storage spend to finance and need defensible chargeback reporting."
                 rows={3}
                 className="w-full px-4 py-2.5 bg-gray-900 border border-gray-700 rounded-lg text-sm text-gray-100 placeholder-gray-600 focus:outline-none focus:ring-1 focus:ring-teal-500 focus:border-teal-500 resize-none transition-colors"
               />
